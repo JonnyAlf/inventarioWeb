@@ -1,52 +1,64 @@
-import React, { useState } from 'react';
-import { useAuth } from './auth-context-provider';
 
-const RegisterForm: React.FC = () => {
-    const { login } = useAuth();
-    const [email, setEmail] = useState('');
+import React, { useState, useEffect } from 'react';
+
+const Register: React.FC = () => {
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [message, setMessage] = useState('');
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        
-        // Simulando a criação de um usuário
-        const newUser = { id: Date.now(), email };
-        
-        // Chamando a função de login do contexto
-        login(newUser);
-        
-        // Limpar o campo de e-mail após o registro
-        setEmail('');
+    useEffect(() => {
+        const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
+        const adminUser = { username: 'admin', password: 'admin123' };
+
+        if (!existingUsers.some((user: { username: string }) => user.username === adminUser.username)) {
+            existingUsers.push(adminUser);
+            localStorage.setItem('users', JSON.stringify(existingUsers));
+        }
+    }, []);
+
+    const handleRegister = (event: React.FormEvent) => {
+        event.preventDefault();
+
+        const existingUsers = JSON.parse(localStorage.getItem('users') || '[]');
+
+        const userExists = existingUsers.some((user: { username: string }) => user.username === username);
+
+        if (userExists) {
+            setMessage('Usuário já existe. Escolha outro nome.');
+            return;
+        }
+
+        const newUser = { username, password };
+        existingUsers.push(newUser);
+        localStorage.setItem('users', JSON.stringify(existingUsers));
+        setMessage('Usuário registrado com sucesso!');
+        setUsername('');
+        setPassword('');
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <h2>Registre-se</h2>
+        <div>
+            <h2>Registrar</h2>
+            <form onSubmit={handleRegister}>
                 <input
-                    placeholder='E-mail'
-                    type="email"
-                    id="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    type="text"
+                    placeholder="Usuário"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                     required
                 />
-            </div>
-            <div>
-                
                 <input
-                    placeholder='Senha'
                     type="password"
-                    id="password"
+                    placeholder="Senha"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
-            </div>
-            
-            <button type="submit">Registrar</button> 
-        </form>
+                <button type="submit">Registrar</button>
+            </form>
+            {message && <p>{message}</p>}
+        </div>
     );
 };
 
-export default RegisterForm;
+export default Register;
