@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from './auth-context-provider';
 
+
 const Login: React.FC = () => {
     const { login } = useAuth();
     const [email, setEmail] = useState<string>('');
@@ -19,17 +20,17 @@ const Login: React.FC = () => {
             <h2>Login</h2>
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>Email:</label>
                     <input 
+                        placeholder='E-mail'
                         type="email" 
                         value={email} 
                         onChange={(e) => setEmail(e.target.value)} 
                         required 
                     />
                 </div>
-                <div>
-                    <label>Senha:</label>
-                    <input 
+                <div>         
+                    <input
+                        placeholder='Senha'
                         type="password" 
                         value={password} 
                         onChange={(e) => setPassword(e.target.value)} 
@@ -37,6 +38,10 @@ const Login: React.FC = () => {
                     />
                 </div>
                 <button type="submit">Entrar</button>
+
+                <div className="singup-link">
+                    <p>Não possui conta? <a href="/register">Registre-se</a></p>
+                </div>
             </form>
         </div>
     );

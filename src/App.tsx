@@ -1,11 +1,15 @@
 
 import './App.css'
+import CustomRoutes from './components/router/routes'
+
 
 
 function App() {
 
   return (
-    <div></div>
+    <div>
+      <CustomRoutes/>
+    </div>
   )
 }
 

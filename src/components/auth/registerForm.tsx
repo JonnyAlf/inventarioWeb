@@ -22,8 +22,9 @@ const RegisterForm: React.FC = () => {
     return (
         <form onSubmit={handleSubmit}>
             <div>
-                <label htmlFor="email">Email:</label>
+                <h2>Registre-se</h2>
                 <input
+                    placeholder='E-mail'
                     type="email"
                     id="email"
                     value={email}
@@ -32,8 +33,9 @@ const RegisterForm: React.FC = () => {
                 />
             </div>
             <div>
-                <label htmlFor="password">Senha:</label>
-                <input 
+                
+                <input
+                    placeholder='Senha'
                     type="password"
                     id="password"
                     value={password}
@@ -41,7 +43,8 @@ const RegisterForm: React.FC = () => {
                     required
                 />
             </div>
-            <button type="submit">Registrar</button>
+            
+            <button type="submit">Registrar</button> 
         </form>
     );
 };

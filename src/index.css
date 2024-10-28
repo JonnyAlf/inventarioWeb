@@ -9,7 +9,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #e6d9d9;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -46,7 +46,7 @@ button {
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
+  background-color: #f3ebeb;
   cursor: pointer;
   transition: border-color 0.25s;
 }
@@ -58,9 +58,13 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+input {
+  background-color: #f3ebeb;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
+    color: #ebf0f5;
     background-color: #ffffff;
   }
   a:hover {

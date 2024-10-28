@@ -1,10 +1,9 @@
 
-import './App.css'
 import { AuthProvider } from '../components/auth//auth-context-provider'
 import Register from '../components/auth/registerForm'
 
 
-function RegisterPage() {
+export default function RegisterPage() {
 
   return (
     <AuthProvider>
@@ -14,4 +13,4 @@ function RegisterPage() {
   )
 }
 
-export default RegisterPage
+
