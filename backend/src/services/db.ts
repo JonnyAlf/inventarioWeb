@@ -48,7 +48,7 @@ export const createTables = (): Promise<void> => {
     const createPedidoTableQuery = `
         CREATE TABLE IF NOT EXISTS pedido (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            data TEXT NOT NULL,
+            data DATE NOT NULL,
             clienteId INTEGER,
             status TEXT NOT NULL,
             total REAL NOT NULL,
@@ -71,7 +71,7 @@ export const createTables = (): Promise<void> => {
     const createTransacaoTableQuery = `
         CREATE TABLE IF NOT EXISTS transacao (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            data TEXT NOT NULL,
+            data DATE NOT NULL,
             tipo TEXT NOT NULL,
             valor REAL NOT NULL,
             produtoId INTEGER,
@@ -93,6 +93,7 @@ export const createTables = (): Promise<void> => {
     let db = openConnection();
     return new Promise<void>((resolve, reject) => {
         db.serialize(() => {
+            // Executa as queries para criar as tabelas
             db.run(createFornecedorTableQuery, (err) => {
                 if (err) {
                     reject(err);
@@ -128,6 +129,7 @@ export const createTables = (): Promise<void> => {
                     reject(err);
                 }
             });
+
             resolve();
         });
     })

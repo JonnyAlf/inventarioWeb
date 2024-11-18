@@ -54,6 +54,7 @@ const deleteFornecedor = (req: Request, res: Response) => {
         .catch(err => internalServerError(res, err));
 };
 
+
 export const fornecedorController = {
     insertFornecedor,
     listFornecedor,
